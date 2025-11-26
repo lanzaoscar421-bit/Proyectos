@@ -33,6 +33,7 @@ public class GestionVideoDaw {
 
         if (!sc.hasNextInt()) {
             System.out.println("Introduce un número (no letras).");
+            sc.nextLine(); // Medida para usuarios
             sc.nextLine();
             continue;
         }

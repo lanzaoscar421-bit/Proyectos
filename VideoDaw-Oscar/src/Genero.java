@@ -1,2 +1,6 @@
-public @interface Genero {
+public enum Genero {
+
+    Shonen, Sheinen, Isekai, Shojo, Horror,;
+
+
 }

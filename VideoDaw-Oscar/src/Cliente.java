@@ -12,6 +12,55 @@ public class Cliente {
     private int PeliculasAlquiladas;
 
     //Constructores
-    //Getters-Setters
+    public Cliente(String DNI, String Nombre, String NumeroSocio,String Direccion,LocalDate FechaNacimiento,LocalDate FechaBaja,int PeliculasAlquiladas) {
+        this.DNI = DNI;
+        this.Nombre = Nombre;
+        this.Direccion = Direccion;
+        this.FechaNacimiento = FechaNacimiento;
+        this.FechaBaja = FechaBaja;
 
+    }
+    //Getters-Setters
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public void setNumeroSocio(int numeroSocio) {
+        NumeroSocio = numeroSocio;
+    }
+
+    public void setDireccion(String direccion) {
+        Direccion = direccion;
+    }
+
+    public void setFechaBaja(LocalDate fechaBaja) {
+        FechaBaja = fechaBaja;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        FechaNacimiento = fechaNacimiento;
+    }
+
+    public void setPeliculasAlquiladas(int peliculasAlquiladas) {
+        PeliculasAlquiladas = peliculasAlquiladas;
+    }
+
+    //Metodos
+
+    public String InfoUsuario() {
+        String info = "";
+        info+="Dni :" + this.DNI + "\n";
+        info+="Nombre :" + this.Nombre + "\n";
+        info+="Numero Socio :" + this.NumeroSocio + "\n";
+        info+="Direccion :" + this.Direccion + "\n";
+        info+="Fecha Nacimiento:" + this.FechaNacimiento + "\n";
+        info+="Fecha Baja:" + this.FechaBaja + "\n";
+        info+="Tus peliculas alquiladas:" + this.PeliculasAlquiladas + "\n";
+        return info;
+    }
+    
 }

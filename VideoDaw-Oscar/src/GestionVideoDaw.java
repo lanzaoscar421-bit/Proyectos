@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -6,6 +8,32 @@ public class GestionVideoDaw {
     public static void main(String[] args) {
 
     Scanner sc = new Scanner(System.in);
+
+    String DNI;
+    String Nombre;
+    String Direccion;
+    LocalDate FechaNacimiento;
+
+    System.out.println("*************************");
+    System.out.println("Bienvenido a Video Daw 🎮");
+    System.out.println("*************************");
+
+//    do {
+//        System.out.println("Primero inserte su DNI:");
+//        System.out.println("Te recuerdo que el DNI consta de ocho números y una letra final en MAYUSCULA Porfavor \n");
+//        DNI = sc.nextLine();
+//    }while (!PatronDNI(DNI));
+//
+//    System.out.println("Inserte su Nombre:");
+//    Nombre = sc.nextLine();
+//
+//    System.out.println("Ahora insete su direccion:");
+//    Direccion = sc.nextLine();
+//
+//    System.out.println("Ahora su Fecha nacimiento:");
+//    FechaNacimiento = LocalDate.parse(sc.nextLine());
+//
+//    System.out.println("Bienvenido a Video Daw, " + Nombre);
 
 
     int opcion = 0;
@@ -71,6 +99,12 @@ public class GestionVideoDaw {
 
 
     }
-
+    //Metodos
     }
+    static boolean PatronDNI(String DNI) {
+        String patron = "[0-9]{8}[A-Z]{1}";
+        return Pattern.matches(patron,DNI);
+    }
+
+
 }

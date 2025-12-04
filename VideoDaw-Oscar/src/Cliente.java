@@ -12,8 +12,6 @@ public class Cliente {
     private LocalDate FechaBaja;
     private int PeliculasAlquiladas;
 
-    private ArrayList<Pelicula> peliculasAlquiladas;
-
     //Constructores
     public Cliente(String DNI, String Nombre, String NumeroSocio,String Direccion,LocalDate FechaNacimiento,LocalDate FechaBaja,int PeliculasAlquiladas) {
         this.DNI = DNI;

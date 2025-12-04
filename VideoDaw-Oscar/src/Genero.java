@@ -1,6 +1,6 @@
 public enum Genero {
 
-    Shonen, Sheinen, Isekai, Shojo, Horror,;
+    SHONEN, SHEINEN, ISEKAI, SHOJO, HORROR,
 
 
 }

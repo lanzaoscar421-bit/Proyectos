@@ -1,21 +1,26 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Pelicula {
     //Atributos
 
-    private int Cod;
+    private static int contadorPeliculas = 1;
+    private String Cod;
     private String Titulo;
     private Genero Genero;
-    private LocalDate Fecha;
+    private String Fecha;
     private LocalDate Fechabaja;
     private LocalDate FechaAlquiler;
     private boolean Isalquilada;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
 
     //Constructores
-    public  Pelicula(int cod, String Titulo, Genero Genero,LocalDate Fecha,LocalDate Fechabaja,LocalDate FechaAlquiler,boolean Isalquilada) {
+    public  Pelicula(String Titulo, Genero Genero) {
 
-        this.Cod = cod;
+        this.Cod = String.format("P-%03d", contadorPeliculas);
+        contadorPeliculas++;//Formato para que cada pelicula que se cree se sume
+
         this.Titulo = Titulo;
         this.Genero = Genero;
         this.Fecha = Fecha;
@@ -26,7 +31,7 @@ public class Pelicula {
 
     //Getters-Setters
 
-    public int getCod() {
+    public String getCod() {
         return Cod;
     }
 
@@ -38,7 +43,7 @@ public class Pelicula {
         return Genero;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
@@ -55,38 +60,16 @@ public class Pelicula {
     }
 
 
-    public static String InfoPelicula(int cod, String titulo, Genero Genero,LocalDate Fecha,LocalDate Fechabaja,LocalDate FechaAlquiler,boolean Isalquilada){
+    public static String InfoPelicula(String cod, String titulo, Genero Genero,String Fecha,LocalDate Fechabaja,LocalDate FechaAlquiler,boolean Isalquilada){
         String info = "";
-        int codPelicula = cod;
+        String codPelicula = cod;
         String tituloPelicula = titulo;
         Genero GeneroPelicula = Genero;
-        LocalDate FechaPelicula = Fecha;
+        String FechaPelicula = Fecha;
         LocalDate FechabajaPelicula = Fechabaja;
 
 
         return info;
-    }
-    //
-    private boolean isalquilada;
-    public boolean estalquilada() {
-        return isalquilada;
-    }
-//Metodo para alquilar y devolver pelicula
-    public void alquilada() {
-        if(!Isalquilada){
-            isalquilada = true;
-            FechaAlquiler = LocalDate.now();
-        } else {
-            System.out.println("Este pelicula esta alquilada");
-        }
-    }
-    public void Devolver() {
-        if(Isalquilada){
-            isalquilada = false;
-            FechaAlquiler = null;
-        } else {
-            System.out.println("Este pelicula no esta alquilada");
-        }
     }
 
 

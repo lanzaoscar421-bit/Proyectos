@@ -9,56 +9,42 @@ public class GestionVideoDaw {
 
     Scanner sc = new Scanner(System.in);
 
-    String DNI;
+    String Cif;
     String Nombre;
     String Direccion;
     LocalDate FechaNacimiento;
 
-    System.out.println("*************************");
+    VideoDaw nuevoUsuario;
+    Pelicula nuevapelicula;
+
+
     System.out.println("Bienvenido a Video Daw 🎮");
-    System.out.println("*************************");
-
-    do {
-        System.out.println("Primero inserte su DNI:");
-        System.out.println("Te recuerdo que el DNI consta de ocho números y una letra final en MAYUSCULA Porfavor \n");
-        DNI = sc.nextLine();
-    }while (!PatronDNI(DNI));
-
-    System.out.println("Inserte su Nombre:");
-    Nombre = sc.nextLine();
-
-    System.out.println("Ahora insete su direccion:");
-    Direccion = sc.nextLine();
-
-    System.out.println("En la Fecha de nacimiento ponga este patron Ejemplo (Anio-Mes-Dia)");
-    System.out.println("Ahora su Fecha nacimiento:");
-    FechaNacimiento = LocalDate.parse(sc.nextLine());
-
-    System.out.println("Bienvenido a Video Daw, " + Nombre);
 
 
-    int opcion = 0;
+        nuevoUsuario = VideoClub(sc);
+
+        int opcion = 0;
 
 
     while(opcion!=8){
 
-        System.out.println("*****************************************************");
+        Bonito();
         System.out.println("Pulse 1 crear y registrar VideoClub en la franquicia.");
-        System.out.println("*****************************************************");
+        Bonito();
         System.out.println("Pulse 2 para registrar pelicula en VideoClub");
-        System.out.println("****************************************************");
+        Bonito();;
         System.out.println("Pulse 3 para crear y registrar cliente en video club");
-        System.out.println("****************************************************");
+        Bonito();
         System.out.println("Pulsa 4 para alquilar Pelicula");
-        System.out.println("******************************");
+        Bonito();
         System.out.println("Pulsa 5 para devolver pelicula");
-        System.out.println("***********************************");
+        Bonito();
         System.out.println("Pulsa 6 para dar de baja al cliente");
-        System.out.println("**************************************");
+        Bonito();
         System.out.println("Pulsa 7 para dar de baja a un pelicula");
-        System.out.println("***************************************");
+        Bonito();
         System.out.println("Pulsa 8 si desea salir");
-        System.out.println("***************************************");
+        Bonito();
 
         if (!sc.hasNextInt()) {
             System.out.println("Introduce un número (no letras).");
@@ -72,14 +58,19 @@ public class GestionVideoDaw {
         switch(opcion){
 
             case 1:
-                System.out.println("Introduce el nombre de la Franquicia:");
+                System.out.println(nuevoUsuario.InfoVideoDAW());//Pongo la información de VideoDAW
 
 
             break;
             case 2:
-                System.out.println("Introduce el nombre de la Pelicula:");
+                if (nuevaPelicula(sc)) return;
 
-            break;
+
+
+
+
+
+                break;
             case 3:
 
             break;
@@ -105,8 +96,53 @@ public class GestionVideoDaw {
     }
     //Metodos
     }
-    static boolean PatronDNI(String DNI) {
-        String patron = "[0-9]{8}[A-Z]{1}";
+
+    private static boolean nuevaPelicula(Scanner sc) {
+        System.out.println("Introduce el Titulo de la Pelicula:");
+        String Titulo = sc.nextLine();
+        System.out.println("Introduce el genero de la Pelicula, Estos son los disponibles");
+        System.out.println("SHONEN, SHEINEN, ISEKAI, SHOJO, HORRO");
+        String generoInput = sc.nextLine().toUpperCase(); // Para evitar errores por mayúsculas
+        Genero genero = null;
+
+        try {
+            genero = Genero.valueOf(generoInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Género no válido. Debes elegir uno de los disponibles.");
+            return true;
+        }
+
+        System.out.println("Has introducido el género: " + genero);
+        return false;
+    }
+
+    private static void Bonito() {
+        System.out.println("*****************************************************");
+    }
+
+    private static VideoDaw VideoClub(Scanner sc) {
+        String Cif;
+        String Direccion;
+        VideoDaw nuevoUsuario;
+        String Nombre;
+        do {
+            System.out.println("Primero inserte el CIF del VideoClub:");
+            System.out.println("Te recuerdo que el CIF valido para la empresa (Ejemplo: A12345678)\" \n");
+            Cif = sc.nextLine();
+        }while (!PatronCIF(Cif));
+
+        System.out.println("Inserte el nombre del VideoClub:");
+        Nombre = sc.nextLine();
+
+        System.out.println("Ahora insete la direccion direccion:");
+        Direccion = sc.nextLine();
+
+        nuevoUsuario=new VideoDaw(Cif,Direccion,Nombre);//Inserta el dato del VideoDaw
+        return nuevoUsuario;
+    }
+
+    static boolean PatronCIF(String DNI) {
+        String patron = "^[A-HJUV][0-9]{7}[A-Z0-9]$";
         return Pattern.matches(patron,DNI);
     }
 

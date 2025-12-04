@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Cliente {
     //Atributos
@@ -10,6 +11,8 @@ public class Cliente {
     private LocalDate FechaNacimiento; //Debe de ser mayor de edad
     private LocalDate FechaBaja;
     private int PeliculasAlquiladas;
+
+    private ArrayList<Pelicula> peliculasAlquiladas;
 
     //Constructores
     public Cliente(String DNI, String Nombre, String NumeroSocio,String Direccion,LocalDate FechaNacimiento,LocalDate FechaBaja,int PeliculasAlquiladas) {

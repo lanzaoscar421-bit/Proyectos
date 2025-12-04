@@ -18,22 +18,23 @@ public class GestionVideoDaw {
     System.out.println("Bienvenido a Video Daw 🎮");
     System.out.println("*************************");
 
-//    do {
-//        System.out.println("Primero inserte su DNI:");
-//        System.out.println("Te recuerdo que el DNI consta de ocho números y una letra final en MAYUSCULA Porfavor \n");
-//        DNI = sc.nextLine();
-//    }while (!PatronDNI(DNI));
-//
-//    System.out.println("Inserte su Nombre:");
-//    Nombre = sc.nextLine();
-//
-//    System.out.println("Ahora insete su direccion:");
-//    Direccion = sc.nextLine();
-//
-//    System.out.println("Ahora su Fecha nacimiento:");
-//    FechaNacimiento = LocalDate.parse(sc.nextLine());
-//
-//    System.out.println("Bienvenido a Video Daw, " + Nombre);
+    do {
+        System.out.println("Primero inserte su DNI:");
+        System.out.println("Te recuerdo que el DNI consta de ocho números y una letra final en MAYUSCULA Porfavor \n");
+        DNI = sc.nextLine();
+    }while (!PatronDNI(DNI));
+
+    System.out.println("Inserte su Nombre:");
+    Nombre = sc.nextLine();
+
+    System.out.println("Ahora insete su direccion:");
+    Direccion = sc.nextLine();
+
+    System.out.println("En la Fecha de nacimiento ponga este patron Ejemplo (Anio-Mes-Dia)");
+    System.out.println("Ahora su Fecha nacimiento:");
+    FechaNacimiento = LocalDate.parse(sc.nextLine());
+
+    System.out.println("Bienvenido a Video Daw, " + Nombre);
 
 
     int opcion = 0;
@@ -71,9 +72,12 @@ public class GestionVideoDaw {
         switch(opcion){
 
             case 1:
+                System.out.println("Introduce el nombre de la Franquicia:");
+
 
             break;
             case 2:
+                System.out.println("Introduce el nombre de la Pelicula:");
 
             break;
             case 3:

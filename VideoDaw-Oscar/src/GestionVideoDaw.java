@@ -63,7 +63,14 @@ public class GestionVideoDaw {
 
             break;
             case 2:
-                if (nuevaPelicula(sc)) return;
+
+                System.out.println("Introduce el Titulo de la Pelicula:");
+                String Titulo = sc.nextLine();
+                System.out.println("Introduce el genero de la Pelicula, Estos son los disponibles");
+                System.out.println("SHONEN, SHEINEN, ISEKAI, SHOJO, HORRO");
+                String generoInput = sc.nextLine().toUpperCase(); // Para evitar errores por mayúsculas
+                Genero genero = null;
+
 
 
 
@@ -97,24 +104,7 @@ public class GestionVideoDaw {
     //Metodos
     }
 
-    private static boolean nuevaPelicula(Scanner sc) {
-        System.out.println("Introduce el Titulo de la Pelicula:");
-        String Titulo = sc.nextLine();
-        System.out.println("Introduce el genero de la Pelicula, Estos son los disponibles");
-        System.out.println("SHONEN, SHEINEN, ISEKAI, SHOJO, HORRO");
-        String generoInput = sc.nextLine().toUpperCase(); // Para evitar errores por mayúsculas
-        Genero genero = null;
 
-        try {
-            genero = Genero.valueOf(generoInput);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Género no válido. Debes elegir uno de los disponibles.");
-            return true;
-        }
-
-        System.out.println("Has introducido el género: " + genero);
-        return false;
-    }
 
     private static void Bonito() {
         System.out.println("*****************************************************");

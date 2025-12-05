@@ -16,19 +16,25 @@ public class Pelicula {
 
 
     //Constructores
-    public Pelicula(String titulo, Genero genero, Genero genero1, Genero genero2, Genero genero3, Genero genero4) {
+    public Pelicula(String titulo, Genero genero) {
         this.Cod = String.format("P-%03d", contadorPeliculas);
-        contadorPeliculas++;//Formato para que cada pelicula que se cree se sume
+        contadorPeliculas++;
 
-        this.Titulo = Titulo;
-        this.Genero = Genero;
-        this.Fecha = Fecha;
-        this.Fechabaja = Fechabaja;
-        this.FechaAlquiler = FechaAlquiler;
-        this.Isalquilada = isIsalquilada();
+        this.Titulo = titulo;
+        this.Genero = genero;
+        this.Fecha = LocalDate.now().toString();
+        this.Fechabaja = null;
+        this.FechaAlquiler = null;
+        this.Isalquilada = false;
     }
 
+
     //Getters-Setters
+
+
+    public static int getContadorPeliculas() {
+        return contadorPeliculas;
+    }
 
     public String getCod() {
         return Cod;
@@ -58,18 +64,31 @@ public class Pelicula {
         return Isalquilada;
     }
 
-
-    public static String InfoPelicula(String cod, String titulo, Genero Genero,String Fecha,LocalDate Fechabaja,LocalDate FechaAlquiler,boolean Isalquilada){
-        String info = "";
-        String codPelicula = cod;
-        String tituloPelicula = titulo;
-        Genero GeneroPelicula = Genero;
-        String FechaPelicula = Fecha;
-        LocalDate FechabajaPelicula = Fechabaja;
-
-
-        return info;
+    public void setTitulo(String titulo) {
+        Titulo = titulo;
     }
+
+    public void setGenero(Genero genero) {
+        Genero = genero;
+    }
+
+    public void setFecha(String fecha) {
+        Fecha = fecha;
+    }
+
+    public String infopeli() {
+        return  "--------- Información de la Película ---------\n" +
+                "Código:          " + this.Cod + "\n" +
+                "Título:          " + this.Titulo + "\n" +
+                "Género:          " + this.Genero + "\n" +
+                "Fecha alta:      " + this.Fecha + "\n" +
+                "Fecha baja:      " + this.Fechabaja + "\n" +
+                "Fecha alquiler:  " + this.FechaAlquiler + "\n" +
+                "Alquilada?:     " + this.Isalquilada + "\n" +
+                "------------------------------------------------";
+    }
+
+
 
 
 

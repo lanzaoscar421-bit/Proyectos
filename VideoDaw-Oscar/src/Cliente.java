@@ -18,40 +18,55 @@ public class Cliente {
     public Cliente(String DNI, String Nombre, LocalDate FechaNacimiento) {
         this.DNI = DNI;
         this.Nombre = Nombre;
+        this.NumeroSocio = NumeroSocio;
         this.Direccion = Direccion;
         this.FechaNacimiento = FechaNacimiento;
+        this.FechaBaja = FechaBaja;
     }
     //Getters-Setters
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public int getNumeroSocio() {
+        return NumeroSocio;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return FechaNacimiento;
+    }
+
+    public LocalDate getFechaBaja() {
+        return FechaBaja;
+    }
+
+    public int getPeliculasAlquiladas() {
+        return PeliculasAlquiladas;
+    }
+
+    public DateTimeFormatter getDtf() {
+        return dtf;
     }
 
     public void setNombre(String nombre) {
         Nombre = nombre;
     }
 
-    public void setNumeroSocio(int numeroSocio) {
-        NumeroSocio = numeroSocio;
-    }
-
-    public void setDireccion(String direccion) {
-        Direccion = direccion;
-    }
-
-    public void setFechaBaja(LocalDate fechaBaja) {
-        FechaBaja = fechaBaja;
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         FechaNacimiento = fechaNacimiento;
-    }
-
-    public void setPeliculasAlquiladas(int peliculasAlquiladas) {
-        PeliculasAlquiladas = peliculasAlquiladas;
-    }
-
-    public void setDtf(DateTimeFormatter dtf) {
-        this.dtf = dtf;
     }
     //Metodos
 
@@ -60,7 +75,6 @@ public class Cliente {
         info+="Dni :" + this.DNI + "\n";
         info+="Nombre :" + this.Nombre + "\n";
         info+="Numero Socio :" + this.NumeroSocio + "\n";
-        info+="Direccion :" + this.Direccion + "\n";
         info+="Fecha Nacimiento:" + this.FechaNacimiento + "\n";
         info+="Fecha Baja:" + this.FechaBaja + "\n";
         info+="Tus peliculas alquiladas:" + this.PeliculasAlquiladas + "\n";

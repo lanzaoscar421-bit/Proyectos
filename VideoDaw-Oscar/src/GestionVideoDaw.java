@@ -50,7 +50,6 @@ public class GestionVideoDaw {
             if (!sc.hasNextInt()) {
                 System.out.println("Introduce un número (no letras).");
                 sc.nextLine(); // Medida para usuarios
-                sc.nextLine();
                 continue;
             }
 
@@ -61,65 +60,21 @@ public class GestionVideoDaw {
                 case 1:
                     System.out.println(nuevoUsuario.InfoVideoDAW());//Pongo la información de VideoDAW
 
-
                     break;
                 case 2:
-                    int opcion2 = 0;
-                    System.out.println("Introduce el Titulo de la Pelicula:");
-                    String Titulo = sc.nextLine();
-                    System.out.println("Tipos de Pelicula:");
-                    System.out.println("Pulsa 1 si la pelicula es  SHONEN");
-                    System.out.println("Pulsa 2 si la pelicula es  SHEINEN");
-                    System.out.println("Pulsa 3 si la pelicula es  ISEKAI");
-                    System.out.println("Pulsa 4 si la pelicula es  HORROR");
-                    System.out.println("Pulsa 5 si la pelicula es  SHOJO");
-                    switch (opcion2) {
-                        case 1:
-                            Genero SHONEN = Genero.valueOf(sc.nextLine());
-                            System.out.println("Insertaste un Shonen");
-                            break;
-                        case 2:
-                            Genero SHEINEN = Genero.valueOf(sc.nextLine());
-                            System.out.println("Insertaste un Sheinen");
-                            break;
-                        case 3:
-                            Genero ISEKAI = Genero.valueOf(sc.nextLine());
-                            System.out.println("Insertaste un ISEKAI");
-                            break;
-                        case 4:
-                            Genero HORROR = Genero.valueOf(sc.nextLine());
-                            System.out.println("Insertaste un Horror");
-                            break;
-                        case 5:
-                            Genero SHOJO = Genero.valueOf(sc.nextLine());
-                            System.out.println("Insertaste un Shojo");
-                        default:
-                            System.out.println("La opcion que escogiste no esta entre las opciones.");
-                    }
-
-
+                    sc = Pelicula();
 
                     break;
                 case 3:
-                    String DNI;
-                    do {
-                        System.out.println("Inserte SU DNI");
-                        System.out.println("El DNI consta de 8 números + 1 letra ");
-                        System.out.println("Ejemplo: 12345678Z");
-                        DNI = sc.nextLine();
-                    } while (!PatronDNI(DNI));
-                    System.out.println("Inserte su nombre");
-                    String NombreUsuario = sc.nextLine();
-                    System.out.println("Inserte su direccion");
-                    String DireccionUsuario = sc.nextLine();
-                    System.out.println("Inserte su fecha nacimiento");
-                    LocalDate FehcaNacimiento;
-                    FechaNacimiento = LocalDate.parse(sc.nextLine());
-                    nuevoCliente = new  Cliente(DNI,DireccionUsuario,FechaNacimiento);
-                    System.out.println(nuevoCliente);
+                    Cliente(sc);
 
                     break;
                 case 4:
+                    System.out.println("Peliculas disponibles: ");
+
+
+
+
 
                     break;
                 case 5:
@@ -139,6 +94,61 @@ public class GestionVideoDaw {
 
 
         }
+    }
+
+    private static Scanner Pelicula() {
+        Scanner sc;
+        sc = new Scanner(System.in);
+        System.out.println("Inserte el Titulo de la pelicula");
+        String titulo = sc.nextLine();
+
+
+        System.out.println("Ahora inserte el Genero acontinuacion te pondre los disponibles");
+        for (Genero g : Genero.values()) {
+            System.out.println("- " + g);
+        }
+
+        Genero genero = null;
+
+        while (genero == null){
+            System.out.println("Escribe bien el nombre del genero");
+            String entrada = sc.nextLine().toUpperCase();
+            //Comprobacion para Si el genero que puso el usuario Exsiste
+
+            for (Genero g : Genero.values()){
+                if (g.name().equals(entrada)){
+                    genero = g;//Romper ciclo whilw
+                    break;
+                }
+            }
+            if (genero == null){
+                System.out.println("El genero que pusiste es invalido");
+            }
+        }
+        Pelicula nuevaPeli = new Pelicula(titulo,genero);
+        System.out.println("Registraste Bien la peli");
+        System.out.println(nuevaPeli.infopeli());
+        return sc;
+    }
+    //Metodos
+
+    private static void Cliente(Scanner sc) {
+        Cliente nuevoCliente;
+        LocalDate FechaNacimiento;
+        String DNI;
+        do {
+            System.out.println("Inserte SU DNI");
+            System.out.println("El DNI consta de 8 números + 1 letra ");
+            System.out.println("Ejemplo: 12345678Z");
+            DNI = sc.nextLine();
+        } while (!PatronDNI(DNI));
+        System.out.println("Inserte su nombre");
+        String NombreUsuario = sc.nextLine();
+        System.out.println("Inserte su fecha nacimiento");
+        LocalDate FehcaNacimiento;
+        FechaNacimiento = LocalDate.parse(sc.nextLine());
+        nuevoCliente = new  Cliente(DNI,NombreUsuario,FechaNacimiento);
+        System.out.println(nuevoCliente.InfoUsuario());
     }
 
 

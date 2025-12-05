@@ -16,8 +16,7 @@ public class Pelicula {
 
 
     //Constructores
-    public  Pelicula(String Titulo, Genero Genero) {
-
+    public Pelicula(String titulo, Genero genero, Genero genero1, Genero genero2, Genero genero3, Genero genero4) {
         this.Cod = String.format("P-%03d", contadorPeliculas);
         contadorPeliculas++;//Formato para que cada pelicula que se cree se sume
 

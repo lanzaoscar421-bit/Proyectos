@@ -1,5 +1,6 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Cliente {
     //Atributos
@@ -11,15 +12,14 @@ public class Cliente {
     private LocalDate FechaNacimiento; //Debe de ser mayor de edad
     private LocalDate FechaBaja;
     private int PeliculasAlquiladas;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     //Constructores
-    public Cliente(String DNI, String Nombre, String NumeroSocio,String Direccion,LocalDate FechaNacimiento,LocalDate FechaBaja,int PeliculasAlquiladas) {
+    public Cliente(String DNI, String Nombre, LocalDate FechaNacimiento) {
         this.DNI = DNI;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.FechaNacimiento = FechaNacimiento;
-        this.FechaBaja = FechaBaja;
-
     }
     //Getters-Setters
     public void setDNI(String DNI) {
@@ -50,6 +50,9 @@ public class Cliente {
         PeliculasAlquiladas = peliculasAlquiladas;
     }
 
+    public void setDtf(DateTimeFormatter dtf) {
+        this.dtf = dtf;
+    }
     //Metodos
 
     public String InfoUsuario() {

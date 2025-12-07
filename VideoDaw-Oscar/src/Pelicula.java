@@ -76,6 +76,10 @@ public class Pelicula {
         Fecha = fecha;
     }
 
+    public void setIsalquilada(boolean isalquilada) {
+        Isalquilada = isalquilada;
+    }
+
     public String infopeli() {
         return  "--------- Información de la Película ---------\n" +
                 "Código:          " + this.Cod + "\n" +

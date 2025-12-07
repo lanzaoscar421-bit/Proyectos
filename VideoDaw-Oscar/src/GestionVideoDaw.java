@@ -14,7 +14,7 @@ public class GestionVideoDaw {
         String Direccion;
         LocalDate FechaNacimiento;
 
-        VideoDaw nuevoUsuario;
+        VideoDaw nuestroVideoclub;
         Pelicula nuevaPelicula;
         Cliente nuevoCliente;
 
@@ -22,30 +22,30 @@ public class GestionVideoDaw {
         System.out.println("Bienvenido a Video Daw 🎮");
 
 
-        nuevoUsuario = VideoClub(sc);
+        nuestroVideoclub = VideoClub(sc);
 
         int opcion = 0;
 
 
         while (opcion != 8) {
 
-            Bonito();
+            decoracion();
             System.out.println("Pulse 1 crear y registrar VideoClub en la franquicia.");
-            Bonito();
+            decoracion();
             System.out.println("Pulse 2 para registrar pelicula en VideoClub");
-            Bonito();
+            decoracion();
             System.out.println("Pulse 3 para crear y registrar cliente en video club");
-            Bonito();
+            decoracion();
             System.out.println("Pulsa 4 para alquilar Pelicula");
-            Bonito();
+            decoracion();
             System.out.println("Pulsa 5 para devolver pelicula");
-            Bonito();
+            decoracion();
             System.out.println("Pulsa 6 para dar de baja al cliente");
-            Bonito();
+            decoracion();
             System.out.println("Pulsa 7 para dar de baja a un pelicula");
-            Bonito();
+            decoracion();
             System.out.println("Pulsa 8 si desea salir");
-            Bonito();
+            decoracion();
 
             if (!sc.hasNextInt()) {
                 System.out.println("Introduce un número (no letras).");
@@ -58,22 +58,21 @@ public class GestionVideoDaw {
             switch (opcion) {
 
                 case 1:
-                    System.out.println(nuevoUsuario.InfoVideoDAW());//Pongo la información de VideoDAW
+                    System.out.println(nuestroVideoclub.InfoVideoDAW());//Pongo la información de VideoDAW
 
                     break;
                 case 2:
-                    sc = Pelicula();
+                    Pelicula(nuestroVideoclub);
 
                     break;
                 case 3:
-                    Cliente(sc);
-
+                    nuevocliente(nuestroVideoclub);//El usuario videoDaw lo usamos para guardar toda la informacion
                     break;
                 case 4:
-                    System.out.println("Peliculas disponibles: ");
-
-
-
+                    System.out.println("Para alquilar inserte el cod del Cliente");
+                    String codcliente = sc.nextLine().toUpperCase();
+                    System.out.println("Inserte el codigo de la Pelicula");
+                    String codpelicula = sc.nextLine().toUpperCase();
 
 
                     break;
@@ -87,6 +86,7 @@ public class GestionVideoDaw {
 
                     break;
                 case 8:
+                    System.out.println("Adios.");
 
                     break;
 
@@ -96,7 +96,7 @@ public class GestionVideoDaw {
         }
     }
 
-    private static Scanner Pelicula() {
+    private static void Pelicula(VideoDaw videoclub) {//Recordar poner poner el Input
         Scanner sc;
         sc = new Scanner(System.in);
         System.out.println("Inserte el Titulo de la pelicula");
@@ -116,7 +116,7 @@ public class GestionVideoDaw {
             //Comprobacion para Si el genero que puso el usuario Exsiste
 
             for (Genero g : Genero.values()){
-                if (g.name().equals(entrada)){
+                if (g.name().equalsIgnoreCase(entrada)){//equalsIgnoreCase para que el usuario ponga mayusculas o minusculas
                     genero = g;//Romper ciclo whilw
                     break;
                 }
@@ -126,21 +126,29 @@ public class GestionVideoDaw {
             }
         }
         Pelicula nuevaPeli = new Pelicula(titulo,genero);
-        System.out.println("Registraste Bien la peli");
-        System.out.println(nuevaPeli.infopeli());
-        return sc;
+        boolean resultado = videoclub.sumarPelicula(nuevaPeli);
+        if (resultado){
+            System.out.println("Registraste Bien la peli");
+        }else{
+            System.out.println("No se añadio");
+        }
     }
     //Metodos
 
-    private static void Cliente(Scanner sc) {
+    private static void nuevocliente(VideoDaw videoclub) {
+        Scanner sc;
         Cliente nuevoCliente;
         LocalDate FechaNacimiento;
         String DNI;
         do {
+            sc = new Scanner(System.in);
             System.out.println("Inserte SU DNI");
             System.out.println("El DNI consta de 8 números + 1 letra ");
             System.out.println("Ejemplo: 12345678Z");
             DNI = sc.nextLine();
+            if (!PatronDNI(DNI)){
+                System.out.println("Error, vuelve a insertar el DNI");
+            }
         } while (!PatronDNI(DNI));
         System.out.println("Inserte su nombre");
         String NombreUsuario = sc.nextLine();
@@ -149,13 +157,20 @@ public class GestionVideoDaw {
         FechaNacimiento = LocalDate.parse(sc.nextLine());
         nuevoCliente = new  Cliente(DNI,NombreUsuario,FechaNacimiento);
         System.out.println(nuevoCliente.InfoUsuario());
+        boolean resultado = videoclub.sumarCliente(nuevoCliente);
+        if (resultado){
+            System.out.println("Añadimos cliente exsitosamente");
+        }else{
+            System.out.println("No se añadio");
+        }
+
     }
 
 
     //Metodos
 
 
-    private static void Bonito() {
+    private static void decoracion() {
         System.out.println("*****************************************************");
     }
 

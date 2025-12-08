@@ -12,7 +12,7 @@ public class Cliente {
     private LocalDate FechaNacimiento; //Debe de ser mayor de edad
     private LocalDate FechaBaja;
     private int PeliculasAlquiladas;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private String dtf ="dd-MM-yyyy";
     private int contadorPeliculas;
     private Pelicula[] historialPeliculasAlquiladas;
 
@@ -20,12 +20,13 @@ public class Cliente {
     public Cliente(String DNI, String Nombre, LocalDate FechaNacimiento) {
         this.DNI = DNI;
         this.Nombre = Nombre;
-        this.NumeroSocio = String.format("P-%03d", contadorClientes);
+        this.NumeroSocio = String.format("S-%03d", contadorClientes);
         contadorClientes++;
         this.Direccion = Direccion;
         this.FechaNacimiento = FechaNacimiento;
         this.FechaBaja = FechaBaja;
         this.contadorPeliculas = 0;
+        this.historialPeliculasAlquiladas = new Pelicula[10];
     }
     //Getters-Setters
 
@@ -59,16 +60,14 @@ public class Cliente {
         return PeliculasAlquiladas;
     }
 
-    public DateTimeFormatter getDtf() {
-        return dtf;
-    }
 
     public void setNombre(String nombre) {
         Nombre = nombre;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+
+    public void setFechaBaja(LocalDate fechaBaja) {
+        FechaBaja = fechaBaja;
     }
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
@@ -77,15 +76,21 @@ public class Cliente {
     //Metodos
 
     public String InfoUsuario() {
-        String info = "";
-        info+="Dni :" + this.DNI + "\n";
-        info+="Nombre :" + this.Nombre + "\n";
-        info+="Numero Socio :" + this.NumeroSocio + "\n";
-        info+="Fecha Nacimiento:" + this.FechaNacimiento + "\n";
-        info+="Fecha Baja:" + this.FechaBaja + "\n";
-        info+="Tus peliculas alquiladas:" + this.PeliculasAlquiladas + "\n";
-        return info;
+        String fechaBaja = "Fecha baja:    \n";
+        if (this.FechaBaja != null){
+            fechaBaja = "Fecha baja:      " + DateTimeFormatter.ofPattern(dtf).format(this.FechaBaja) + "\n";
+        }
+        return  "===== INFORMACIÓN DE USUARIO =====\n" +
+                "DNI:                 " + this.DNI + "\n" +
+                "Nombre:              " + this.Nombre + "\n" +
+                "Número de Socio:     " + this.NumeroSocio + "\n" +
+                "Fecha Nacimiento:    " + this.FechaNacimiento + "\n" +
+                fechaBaja +
+                "Películas alquiladas:" + this.PeliculasAlquiladas + "\n" +
+                "==================================";
     }
+
+
     public boolean sumarPelicula(Pelicula p){
         boolean resultado = false; //Si todo va mal no funciona
 
@@ -103,6 +108,14 @@ public class Cliente {
 
         }
         return resultado;
+    }
+    public Pelicula buscarHistorialPeliculas (String Cod){
+        for (int i = 0; i < contadorPeliculas; i++){
+            if (historialPeliculasAlquiladas[i].getCod().equalsIgnoreCase(Cod)) {
+                return historialPeliculasAlquiladas[i];
+            }
+        }
+        return null;
     }
 
     

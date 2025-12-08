@@ -17,12 +17,19 @@ public class GestionVideoDaw {
         VideoDaw nuestroVideoclub;
         Pelicula nuevaPelicula;
         Cliente nuevoCliente;
+        Cliente clienteSeleccionado;
+        Pelicula peliculaSeleccionada;
+        String codcliente;
+        String codpelicula;
+        boolean exsitososPeli;
+        boolean exsitosoCliente;
 
 
         System.out.println("Bienvenido a Video Daw 🎮");
 
 
         nuestroVideoclub = VideoClub(sc);
+
 
         int opcion = 0;
 
@@ -42,7 +49,7 @@ public class GestionVideoDaw {
             decoracion();
             System.out.println("Pulsa 6 para dar de baja al cliente");
             decoracion();
-            System.out.println("Pulsa 7 para dar de baja a un pelicula");
+            System.out.println("Pulsa 7 para dar de baja a una pelicula");
             decoracion();
             System.out.println("Pulsa 8 si desea salir");
             decoracion();
@@ -69,20 +76,18 @@ public class GestionVideoDaw {
                     nuevocliente(nuestroVideoclub);//El usuario videoDaw lo usamos para guardar toda la informacion
                     break;
                 case 4:
-                    System.out.println("Para alquilar inserte el cod del Cliente");
-                    String codcliente = sc.nextLine().toUpperCase();
-                    System.out.println("Inserte el codigo de la Pelicula");
-                    String codpelicula = sc.nextLine().toUpperCase();
-
+                    alquilarPyC(sc, nuestroVideoclub);
 
                     break;
                 case 5:
 
-                    break;
-                case 6:
 
                     break;
+                case 6:
+                    bajaCliente(nuestroVideoclub, sc);
+                    break;
                 case 7:
+                    bajaPelicula(nuestroVideoclub, sc);
 
                     break;
                 case 8:
@@ -94,6 +99,57 @@ public class GestionVideoDaw {
 
 
         }
+    }
+
+    private static void bajaCliente(VideoDaw nuestroVideoclub, Scanner sc) {
+        Cliente clienteSeleccionado;
+        boolean exsitosoCliente;
+        String codcliente;
+        System.out.println("Para Dar de baja al cliente inserte el cod del Cliente");
+        System.out.println(nuestroVideoclub.mostrarClientes());
+        codcliente = sc.nextLine().toUpperCase();
+        clienteSeleccionado= nuestroVideoclub.busquedaCliente(codcliente);
+        exsitosoCliente = nuestroVideoclub.bajaCliente(clienteSeleccionado);
+        if (exsitosoCliente){
+            System.out.println("Se dio de baja Exitosamente");
+        }else {
+            System.out.println("Hubo un error");
+        }
+    }
+
+    private static void bajaPelicula(VideoDaw nuestroVideoclub, Scanner sc) {
+        Pelicula peliculaSeleccionada;
+        boolean exsitososPeli;
+        String codpelicula;
+        System.out.println("Para Dar de baja a la pelicula inserte el cod de la pelicula");
+        System.out.println(nuestroVideoclub.mostrarPeliculas());
+        codpelicula = sc.nextLine().toUpperCase();
+        peliculaSeleccionada= nuestroVideoclub.buscarPelicula(codpelicula);
+        exsitososPeli = nuestroVideoclub.bajaPelicula(peliculaSeleccionada);
+        if (exsitososPeli){
+            System.out.println("Se dio de baja Exitosamente");
+        }else {
+            System.out.println("Hubo un error");
+        }
+    }
+
+    private static void alquilarPyC(Scanner sc, VideoDaw nuestroVideoclub) {
+        Pelicula peliculaSeleccionada;
+        Cliente clienteSeleccionado;
+        System.out.println("Para alquilar inserte el cod del Cliente");
+        String codcliente = sc.nextLine().toUpperCase();
+        System.out.println("Inserte el codigo de la Pelicula");
+        String codpelicula = sc.nextLine().toUpperCase();
+        clienteSeleccionado= nuestroVideoclub.busquedaCliente(codcliente);
+        peliculaSeleccionada= nuestroVideoclub.buscarPelicula(codpelicula);
+
+        boolean resultado = nuestroVideoclub.alquilar(clienteSeleccionado,peliculaSeleccionada);
+        if (resultado){
+            System.out.println("Se alquilo existosamente");
+        }else{
+            System.out.println("Hubo un Error");
+        }
+
     }
 
     private static void Pelicula(VideoDaw videoclub) {//Recordar poner poner el Input
@@ -129,9 +185,11 @@ public class GestionVideoDaw {
         boolean resultado = videoclub.sumarPelicula(nuevaPeli);
         if (resultado){
             System.out.println("Registraste Bien la peli");
+            System.out.println(nuevaPeli.infopeli());
         }else{
             System.out.println("No se añadio");
         }
+
     }
     //Metodos
 
@@ -161,7 +219,7 @@ public class GestionVideoDaw {
         if (resultado){
             System.out.println("Añadimos cliente exsitosamente");
         }else{
-            System.out.println("No se añadio");
+            System.out.println("No se consigui añadir al cliente, revisa que sea mayor de Edad");
         }
 
     }
@@ -188,7 +246,7 @@ public class GestionVideoDaw {
         System.out.println("Inserte el nombre del VideoClub:");
         Nombre = sc.nextLine();
 
-        System.out.println("Ahora insete la direccion direccion:");
+        System.out.println("Ahora insete la direccion :");
         Direccion = sc.nextLine();
 
         nuevoUsuario=new VideoDaw(Cif,Direccion,Nombre);//Inserta el dato del VideoDaw

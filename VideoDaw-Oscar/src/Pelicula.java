@@ -1,5 +1,7 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Pelicula {
     //Atributos
@@ -10,9 +12,10 @@ public class Pelicula {
     private Genero Genero;
     private String Fecha;
     private LocalDate Fechabaja;
-    private LocalDate FechaAlquiler;
+    private LocalDateTime FechaAlquiler;
     private boolean Isalquilada;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private String  dtf = "dd-MM-yyyy HH:mm:ss";
+    private String df = "dd-MM-yyyy";
 
 
     //Constructores
@@ -56,7 +59,11 @@ public class Pelicula {
         return Fechabaja;
     }
 
-    public LocalDate getFechaAlquiler() {
+    public void setFechabaja(LocalDate fechabaja) {
+        Fechabaja = fechabaja;
+    }
+
+    public LocalDateTime getFechaAlquiler() {
         return FechaAlquiler;
     }
 
@@ -80,23 +87,29 @@ public class Pelicula {
         Isalquilada = isalquilada;
     }
 
+    public void setFechaAlquiler(LocalDateTime fechaAlquiler) {
+        FechaAlquiler = fechaAlquiler;
+    }
+
     public String infopeli() {
+        String fechas="Fecha Baja:     \n";
+        String fechas2="Fecha Alquiler:     \n";
+        if (this.Fechabaja != null){
+            fechas = "Fecha baja:      " + DateTimeFormatter.ofPattern(df).format(this.Fechabaja) + "\n";
+        }
+        if ( this.FechaAlquiler != null){
+            fechas2 =  DateTimeFormatter.ofPattern(dtf).format(this.FechaAlquiler) + "\n";
+        }
         return  "--------- Información de la Película ---------\n" +
                 "Código:          " + this.Cod + "\n" +
                 "Título:          " + this.Titulo + "\n" +
                 "Género:          " + this.Genero + "\n" +
                 "Fecha alta:      " + this.Fecha + "\n" +
-                "Fecha baja:      " + this.Fechabaja + "\n" +
-                "Fecha alquiler:  " + this.FechaAlquiler + "\n" +
+                fechas +
+                fechas2 +
                 "Alquilada?:     " + this.Isalquilada + "\n" +
                 "------------------------------------------------";
     }
-
-
-
-
-
-
 
 
 

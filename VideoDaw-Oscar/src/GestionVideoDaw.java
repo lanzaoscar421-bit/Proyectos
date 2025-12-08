@@ -16,7 +16,7 @@ public class GestionVideoDaw {
 
         VideoDaw nuestroVideoclub;
         Pelicula nuevaPelicula;
-        Cliente nuevoCliente;
+        Cliente nuevoCliente = null;
         Cliente clienteSeleccionado;
         Pelicula peliculaSeleccionada;
         String codcliente;
@@ -34,7 +34,7 @@ public class GestionVideoDaw {
         int opcion = 0;
 
 
-        while (opcion != 8) {
+        while (opcion != 9) {
 
             decoracion();
             System.out.println("Pulse 1 crear y registrar VideoClub en la franquicia.");
@@ -51,7 +51,9 @@ public class GestionVideoDaw {
             decoracion();
             System.out.println("Pulsa 7 para dar de baja a una pelicula");
             decoracion();
-            System.out.println("Pulsa 8 si desea salir");
+            System.out.println("Pulsa 8 para ver la informacion de usuarios y peliculas");
+            decoracion();
+            System.out.println("Pulsa 9 si desea Salir");
             decoracion();
 
             if (!sc.hasNextInt()) {
@@ -80,9 +82,9 @@ public class GestionVideoDaw {
 
                     break;
                 case 5:
-
-
+                    devolucionPeli(sc, nuestroVideoclub);
                     break;
+
                 case 6:
                     bajaCliente(nuestroVideoclub, sc);
                     break;
@@ -91,14 +93,45 @@ public class GestionVideoDaw {
 
                     break;
                 case 8:
+                    System.out.println(nuestroVideoclub.mostrarClientes());
+                    decoracion();
+                    System.out.println(nuestroVideoclub.mostrarPeliculas());
+
+                    break;
+                case 9:
                     System.out.println("Adios.");
 
                     break;
+                case 10:
 
+                    break;
             }
 
 
         }
+    }
+
+    private static void devolucionPeli(Scanner sc, VideoDaw nuestroVideoclub) {
+        String codpelicula;
+        Cliente clienteSeleccionado;
+        String codcliente;
+        Pelicula peliculaSeleccionada;
+        System.out.println("Para devolver inserte el código del Cliente:");
+        codcliente = sc.nextLine().toUpperCase();
+        System.out.println("Ahora inserte el código de la Película:");
+        codpelicula = sc.nextLine().toUpperCase();
+
+        clienteSeleccionado = nuestroVideoclub.busquedaCliente(codcliente);
+        peliculaSeleccionada = nuestroVideoclub.buscarPelicula(codpelicula);
+
+        if (clienteSeleccionado == null) {
+            System.out.println("Cliente no encontrado, porfavor vuelve a comprobarlo");
+        }
+        if (peliculaSeleccionada == null) {
+            System.out.println("Pelicula no encontrada, porfavor vuelve a comprobarlo");
+        }
+        nuestroVideoclub.devolucion(clienteSeleccionado, peliculaSeleccionada);
+        System.out.println("Película devuelta correctamente.");
     }
 
     private static void bajaCliente(VideoDaw nuestroVideoclub, Scanner sc) {
@@ -211,6 +244,7 @@ public class GestionVideoDaw {
         System.out.println("Inserte su nombre");
         String NombreUsuario = sc.nextLine();
         System.out.println("Inserte su fecha nacimiento");
+        System.out.println("Ejemplo: 2007-12-06");
         LocalDate FehcaNacimiento;
         FechaNacimiento = LocalDate.parse(sc.nextLine());
         nuevoCliente = new  Cliente(DNI,NombreUsuario,FechaNacimiento);

@@ -190,7 +190,7 @@ public class VideoDaw {
         }
         return infoPeliculas;
     }
-    public String devolucion(Cliente c, Pelicula p) {
+    public void devolucion(Cliente c, Pelicula p) {
         String resultado = "No se pudo devolver";
 
         if (c != null && p != null && p.isIsalquilada()){
@@ -207,10 +207,9 @@ public class VideoDaw {
                 }
             }
 
-
         }
 
-        return resultado;
+
     }
 
 }

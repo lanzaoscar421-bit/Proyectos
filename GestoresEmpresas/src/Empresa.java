@@ -9,14 +9,17 @@ public class Empresa {
     private int maximoTrabajadores;
     private Trabajador [] trabajadoresRegistrados;
     private int contadorTrabajadores  = 0;
+    private Persona [] personasRegistradas;
+    private int contadorPersonas = 0;
 
 
-    Empresa(String nombre,String cif){
+    public Empresa(String nombre,String cif){
         this.nombre = nombre;
         this.cif = cif;
         this.fundacion = LocalDate.now();
         this.maximoTrabajadores = 0;
         this.trabajadoresRegistrados = new Trabajador[10];
+        this.personasRegistradas = new Persona[10];
     }
 
     public String getNombre() {
@@ -39,6 +42,18 @@ public class Empresa {
         return trabajadoresRegistrados;
     }
 
+    public Persona[] getPersonasRegistradas() {
+        return personasRegistradas;
+    }
+
+    public int getContadorTrabajadores() {
+        return contadorTrabajadores;
+    }
+
+    public int getContadorPersonas() {
+        return contadorPersonas;
+    }
+
     // Metodos
     public String infoEmpresa() {
         return  "===== INFORMACIÓN DE LA EMPRESA =====\n" +
@@ -48,12 +63,13 @@ public class Empresa {
                 "==================================";
     }
 
+
     public boolean registrarTrabajador(Trabajador t){
         boolean resultado = false;
         if(t != null){
             int index = -1;
             for (int i = 0; i < this.contadorTrabajadores; i++){
-                if (this.trabajadoresRegistrados[i].getdni().equalsIgnoreCase(t.getdni())){
+                if (this.trabajadoresRegistrados[i].getDni().equalsIgnoreCase(t.getDni())){
                     index = i;
                     break;
                 }
@@ -74,7 +90,7 @@ public class Empresa {
 
         for (int i = 0; i < this.contadorTrabajadores; i++){
             if (this.trabajadoresRegistrados[i] != null){
-                if (this.trabajadoresRegistrados[i].getdni().equalsIgnoreCase(dni)){
+                if (this.trabajadoresRegistrados[i].getDni().equalsIgnoreCase(dni)){
                     index = i;
                     break;
                 }
@@ -109,6 +125,52 @@ public class Empresa {
         }
         return info;
     }
+
+
+    public boolean registrarPersona(Persona p){
+        boolean resultado = false;
+        if(p != null){
+            int index = -1;
+            for (int i = 0; i < this.contadorPersonas; i++){
+                if (this.personasRegistradas[i].getDni().equalsIgnoreCase(p.getDni())){
+                    index = i;
+                    break;
+                }
+
+            }
+            if(index == -1){
+                this.personasRegistradas[this.contadorPersonas] = p;
+                this.contadorPersonas++;
+                resultado = true;
+            }
+        }
+        return resultado;
+
+    }
+
+    public boolean eliminarPersona(String dni){
+        boolean resultado = false;
+        int index = -1;
+
+        for (int i = 0; i < this.contadorPersonas; i++){
+            if (this.personasRegistradas[i] != null){
+                if (this.personasRegistradas[i].getDni().equalsIgnoreCase(dni)){
+                    index = i;
+                    break;
+                }
+            }
+        }
+
+        if (index != -1){
+            this.personasRegistradas[index] = this.personasRegistradas[contadorPersonas - 1];
+            this.personasRegistradas[contadorPersonas - 1] = null;
+            contadorPersonas--;
+            resultado = true;
+        }
+
+        return resultado;
+    }
+
 
 
 

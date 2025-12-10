@@ -14,7 +14,7 @@ public class Cliente {
     private int PeliculasAlquiladas;
     private String dtf ="dd-MM-yyyy";
     private int contadorPeliculas;
-    private Pelicula[] historialPeliculasAlquiladas;
+    private Pelicula[] historialPeliculasAlquiladas;// Al ser historial se hace array
 
     //Constructores
     public Cliente(String DNI, String Nombre, LocalDate FechaNacimiento) {

@@ -8,6 +8,7 @@ public class GestionVideoDaw {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        //Link: https://github.com/lanzaoscar421-bit/Proyectos/tree/main/VideoDaw-Oscar
 
         String Cif;
         String Nombre;

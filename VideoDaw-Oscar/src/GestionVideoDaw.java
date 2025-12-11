@@ -101,6 +101,7 @@ public class GestionVideoDaw {
                     break;
                 case 9:
                     System.out.println("Adios.");
+                    System.out.println("Buen Dia");
 
                     break;
                 case 10:

@@ -212,5 +212,6 @@ public class Gestion {
         String patron = "[0-9]{12}";
         return Pattern.matches(patron, numeroSS);
     }
+    
 
 }

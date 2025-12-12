@@ -10,8 +10,10 @@ public class VideoDaw {
     private String Cif;
     private String Direccion;
     private String fechaAlta;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String NombreVideo;
+
+
 
     private int contadorPeliculas;
     private int contadorClientes;
